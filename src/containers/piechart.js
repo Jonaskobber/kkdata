@@ -9,6 +9,7 @@ export class Piechart extends Component {
     super(props)
 
     this.filterData = this.filterData.bind(this)
+    this.makePiechart = this.makePiechart.bind(this)
 
     this.state = {
       data: props.data,
@@ -38,6 +39,23 @@ export class Piechart extends Component {
     return data
   }
 
+  makePiechart () {
+    let params = {
+      colorRange: ['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00'],
+      data: this.filterData(),
+      height: 500,
+      width: 500,
+      value: (d) => {
+        return parseInt(d.Selskabsskat)
+      }
+    }
+
+    return (
+      <PieApp
+        {...params} />
+    )
+  }
+
   render () {
     if(!this.state.data.length)
       return (
@@ -45,14 +63,12 @@ export class Piechart extends Component {
       )
 
     return (
-      <PieApp
-        colorRange={['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']}
-        data={this.filterData()}
-        height={500}
-        width={500}
-        value={(d) => {
-          return parseInt(d.Selskabsskat)
-        }} />
+      <div>
+        {this.makePiechart()}
+        <div>
+          green = alle
+        </div>
+      </div>
     )
   }
 }
@@ -67,7 +83,7 @@ Piechart.defaultProps = {
     standard: () => {
       return true
     },
-    standardAgain: (d) => {
+    onlyOneResult: (d) => {
       if(d.Selskabsskat == 1381)
         return true
       else

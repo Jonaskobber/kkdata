@@ -19,20 +19,19 @@ export class Histogram extends Component {
   }
 
   componentWillMount () {
-    loadCSVData('data/borgere.csv', (err, data) => {
-      if (err)
-        console.log(err)
+    loadCSVData('data/' + this.props.params.url + '.csv', (err, data) => {
+      if (err) console.log(err)
       else {
-        let result = []
+        let filteredData = []
         data.map((d) => {
           for(let i = 0; i < d.PERSONER; i++) {
-            result.push({
+            filteredData.push({
               alder: d.ALDER
             })
           }
         })
         this.setState({
-          data: result
+          data: filteredData
         })
       }
     })
@@ -47,7 +46,6 @@ export class Histogram extends Component {
   }
 
   makeHistogram () {
-    console.log(this.filterData())
     let params = {
       axisMargin: this.props.axisMargin,
       bins: 10,
@@ -139,7 +137,8 @@ Histogram.propTypes = {
   data: PropTypes.array,
   filter: PropTypes.object,
   height: PropTypes.number,
-  width: PropTypes.number
+  width: PropTypes.number,
+  params: PropTypes.object
 }
 Histogram.defaultProps = {
   bars: [],
