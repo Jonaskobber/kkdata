@@ -7,31 +7,35 @@ import { loadCSVData } from '../helpers'
 export class Skatteliste extends Component {
   constructor (props) {
     super(props)
+
+    this.filterData = this.filterData.bind(this)
+
     this.state = {
-      data: props.data
+      data: props.data,
+      filter: props.filter
     }
   }
 
   componentWillMount () {
-    loadCSVData('data/skatteliste.csv', (err, result) => {
+    loadCSVData('data/skatteliste.csv', (err, data) => {
       if (err) console.log(err)
-      else {
-        let data = []
-        data[0] = {}
-        data[0].antal = 0
-        data[1] = {}
-        data[1].antal = 0
-        result.map((d) => {
-          if(parseInt(d.Selskabsskat) === 0)
-            data[0].antal++
-          else
-            data[1].antal++
-        })
+      else
         this.setState({
           data
         })
-      }
     })
+  }
+
+  filterData () {
+    let {
+      data,
+      filter } = this.state
+    for(var key in filter) {
+      if(filter.hasOwnProperty(key)) {
+        data = data.filter(filter[key])
+      }
+    }
+    return data
   }
 
   render () {
@@ -41,22 +45,32 @@ export class Skatteliste extends Component {
       )
 
     return (
-      <svg width={700} height={500}>
-        <PieApp
-          colorRange={['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']}
-          data={this.state.data}
-          height={500}
-          width={700}
-          value={(d) => {
-            return d.antal
-          }} />
-      </svg>
+      <PieApp
+        colorRange={['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']}
+        data={this.filterData()}
+        height={500}
+        width={500}
+        value={(d) => {
+          return parseInt(d.Selskabsskat)
+        }} />
     )
   }
 }
 Skatteliste.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
+  filter: PropTypes.object
 }
 Skatteliste.defaultProps = {
-  data: []
+  data: [],
+  filter: {
+    standard: () => {
+      return true
+    },
+    standardAgain: (d) => {
+      if(d.Selskabsskat == 1381)
+        return true
+      else
+        return false
+    }
+  }
 }

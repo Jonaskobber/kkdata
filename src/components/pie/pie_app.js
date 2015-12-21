@@ -35,9 +35,8 @@ export class PieApp extends Component {
       .outerRadius(Math.min(this.props.height, this.props.width) / 2 - this.props.margin)
       .innerRadius(this.props.innerRadius)
 
-    let arches = this.pie(this.props.data)
     this.setState({
-      arches
+      arches: this.pie(this.props.data)
     })
   }
 
@@ -55,9 +54,11 @@ export class PieApp extends Component {
 
   render () {
     return (
-      <g>
-        {this.state.arches.map(this.makeArch)}
-      </g>
+      <svg width={this.props.width} height={this.props.height}>
+        <g>
+          {this.state.arches.map(this.makeArch)}
+        </g>
+      </svg>
     )
   }
 }
