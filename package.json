@@ -2,7 +2,7 @@
   "name": "kkdata",
   "version": "0.0.0",
   "description": "Visualisering af KK Open Data",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "npm run lint && node devServer.js",
     "lint": "eslint src",
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Jonaskobber/kkdata#readme",
   "dependencies": {
     "d3": "^3.5.10",
+    "history": "^1.13.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3"
   },
