@@ -4,7 +4,7 @@ import { PieApp } from '../components'
 
 import { loadCSVData } from '../helpers'
 
-export class Skatteliste extends Component {
+export class Piechart extends Component {
   constructor (props) {
     super(props)
 
@@ -17,7 +17,7 @@ export class Skatteliste extends Component {
   }
 
   componentWillMount () {
-    loadCSVData('data/skatteliste.csv', (err, data) => {
+    loadCSVData('data/' + this.props.params.url + '.csv', (err, data) => {
       if (err) console.log(err)
       else
         this.setState({
@@ -56,11 +56,12 @@ export class Skatteliste extends Component {
     )
   }
 }
-Skatteliste.propTypes = {
+Piechart.propTypes = {
   data: PropTypes.array,
-  filter: PropTypes.object
+  filter: PropTypes.object,
+  params: PropTypes.object
 }
-Skatteliste.defaultProps = {
+Piechart.defaultProps = {
   data: [],
   filter: {
     standard: () => {

@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { HistogramApp, HistogramAxis, NumberMinMax } from '../components'
 import { loadCSVData } from '../helpers'
 
-export class Borgere extends Component {
+export class Histogram extends Component {
   constructor (props) {
     super(props)
 
@@ -133,7 +133,7 @@ export class Borgere extends Component {
     )
   }
 }
-Borgere.propTypes = {
+Histogram.propTypes = {
   axisMargin: PropTypes.number,
   bars: PropTypes.array,
   data: PropTypes.array,
@@ -141,7 +141,7 @@ Borgere.propTypes = {
   height: PropTypes.number,
   width: PropTypes.number
 }
-Borgere.defaultProps = {
+Histogram.defaultProps = {
   bars: [],
   data: [],
   axisMargin: 80,

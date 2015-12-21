@@ -7,8 +7,8 @@ import { Router, Route, Link } from 'react-router'
 import * as containers from './containers'
 
 const {
-  Borgere,
-  Skatteliste
+  Histogram,
+  Piechart
 } = containers
 
 class App extends Component {
@@ -17,8 +17,8 @@ class App extends Component {
       <div>
         <div>
           <h1>App</h1>
-          <Link to='/skatteliste'>Skat</Link>
-          <Link to='/borgere'>Borgere</Link>
+          <Link to='/piechart/skatteliste'>Skat</Link>
+          <Link to='/histogram/borgere'>Borgere</Link>
         </div>
         {this.props.children}
       </div>
@@ -32,8 +32,8 @@ App.propTypes = {
 render(
   <Router>
     <Route path='/' component={App}>
-      <Route path='/skatteliste' component={Skatteliste} />
-      <Route path='/Borgere' component={Borgere} />
+      <Route path='/piechart/:url' component={Piechart} />
+      <Route path='/histogram/:url' component={Histogram} />
     </Route>
   </Router>,
   document.getElementById('app')

@@ -1,2 +1,2 @@
-export { Borgere } from './borgere'
-export { Skatteliste } from './skatteliste'
+export { Histogram } from './histogram'
+export { Piechart } from './piechart'
