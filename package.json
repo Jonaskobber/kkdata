@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run lint && node devServer.js",
     "lint": "eslint src",
-    "jsdoc": "jsdoc src -r"
+    "jsdoc": "jsdoc src -r",
+    "test": "mocha --compilers js:babel-register test/tests/**/*.js --watch"
   },
   "repository": {
     "type": "git",

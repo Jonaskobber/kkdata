@@ -1,13 +1,13 @@
 /**
- * Class for creating a pie. Pass parameters as React props. This class will automatically include PieArch and pass required props.<br><br>
+ * Class for creating a piechart. Pass parameters as React props. This class will automatically include PieArch class and pass required props.<br><br>
  * @constructor PieApp
- * @param {number} height - Height of the SVG area
- * @param {number} width - Width of the SVG area
- * @param {number} margin - Margin from the pie to the edge of the SVG area. Defaults to 40
+ * @param {number} [height=500] - Height of the SVG area
+ * @param {number} [width=500] - Width of the SVG area
+ * @param {number} [margin=40] - Margin from the pie to the edge of the SVG area
  * @param {array} data - An array of the data over which to create the pie
- * @param {number} innerRadius - The inner radius of the pie app. Defaults to 0
- * @param {function} value - A function to determine the value used to create the histogram. (d) => { return d['NAME'] }
- * @param {array} colorRange - An array of the colors to use in the histogram
+ * @param {number} [innerRadius=0] - The inner radius of the piechart.
+ * @param {function} value - A function to determine the value used to create the piechart. (d) => { return d['NAME'] }
+ * @param {array} [colorRange=['#FF0000', '#00FF00', '#0000FF']] - An array of the colors to use in the piechart.
 */
 
 import React, { Component, PropTypes } from 'react'
@@ -75,5 +75,8 @@ PieApp.propTypes = {
 PieApp.defaultProps = {
   arches: [],
   innerRadius: 0,
-  margin: 40
+  margin: 40,
+  height: 500,
+  width: 500,
+  colorRange: ['#FF0000', '#00FF00', '##0000FF']
 }
